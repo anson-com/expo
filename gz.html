@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>深圳市格众展览策划有限公司 | 全球展台设计搭建一站式交付</title>
+<meta name="description" content="深圳市格众展览策划有限公司，专注展台设计、报馆审批、工厂预制与全球搭建，为参展企业提供确定性的展台交付。清单报价、1:1预搭验收、本地报馆、展期保障。">
+<meta name="theme-color" content="#0A0D12">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   设计系统 Design Tokens
+   ============================================================ */
+:root{
+  --bg:#0A0D12;
+  --surface:#121820;
+  --surface-2:#171F2A;
+  --text:#F5F7FA;
+  --muted:#9AA4B2;
+  --brand:#FF4D00;
+  --brand-soft:rgba(255,77,0,.12);
+  --accent:#00D4FF;
+  --success:#22C55E;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.16);
+
+  --radius:16px;
+  --radius-sm:12px;
+  --radius-xs:10px;
+
+  --max:1440px;
+  --pad:clamp(20px,4.5vw,80px);
+  --sec-pad:clamp(72px,9vw,140px);
+
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font:"Inter","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button,input,select,textarea{font:inherit;color:inherit;}
+ul{list-style:none;}
+
+::selection{background:var(--brand);color:#fff;}
+
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:#232c38;border-radius:20px;border:2px solid var(--bg);}
+::-webkit-scrollbar-thumb:hover{background:#33404f;}
+
+/* ============================================================
+   通用布局
+   ============================================================ */
+.container{
+  width:100%;
+  max-width:var(--max);
+  margin-inline:auto;
+  padding-inline:var(--pad);
+}
+section{position:relative;}
+.section{padding-block:var(--sec-pad);}
+.section--tight{padding-block:clamp(56px,6vw,88px);}
+.section--alt{background:var(--surface);}
+.divider{height:1px;background:var(--border);}
+
+/* 标题组 */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brand);margin-bottom:20px;
+}
+.eyebrow::before{
+  content:"";width:22px;height:2px;background:var(--brand);border-radius:2px;
+}
+.section-head{max-width:980px;margin-bottom:clamp(40px,5vw,68px);}
+.section-head h2{
+  font-size:clamp(28px,4vw,52px);
+  font-weight:700;line-height:1.12;letter-spacing:-.02em;
+}
+.section-head p{
+  margin-top:20px;color:var(--muted);font-size:clamp(15px,1.1vw,17.5px);
+  line-height:1.75;max-width:780px;
+}
+.section-head--center{margin-inline:auto;text-align:center;}
+.section-head--center p{margin-inline:auto;}
+.section-head--center .eyebrow{justify-content:center;}
+
+.grad{
+  background:linear-gradient(100deg,#FF4D00 0%,#FF8A3D 45%,#FFB07A 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+/* 按钮 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 28px;border-radius:var(--radius-sm);
+  font-size:15px;font-weight:600;letter-spacing:.01em;white-space:nowrap;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .25s var(--ease),background .25s,box-shadow .25s,border-color .25s;
+}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease);}
+.btn:hover svg{transform:translateX(4px);}
+.btn--primary{background:var(--brand);color:#fff;box-shadow:0 8px 28px -10px rgba(255,77,0,.75);}
+.btn--primary:hover{background:#FF6A26;transform:translateY(-2px);box-shadow:0 14px 36px -12px rgba(255,77,0,.9);}
+.btn--ghost{background:rgba(255,255,255,.03);border-color:var(--border-strong);color:var(--text);}
+.btn--ghost:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.3);transform:translateY(-2px);}
+.btn--block{width:100%;}
+
+/* ============================================================
+   顶部导航
+   ============================================================ */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:200;
+  transition:background .35s var(--ease),backdrop-filter .35s,border-color .35s;
+  border-bottom:1px solid transparent;
+}
+.site-header.is-scrolled{
+  background:rgba(10,13,18,.82);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom-color:var(--border);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  height:76px;gap:32px;
+}
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.logo__mark{
+  width:38px;height:38px;flex-shrink:0;
+  padding:3px;                        /* LOGO 与橙色边缘的留白 */
+  box-sizing:border-box;
+  background:linear-gradient(140deg,#FF4D00,#FF8A3D);
+  border-radius:11px;
+  box-shadow:0 6px 20px -8px rgba(255,77,0,.9);
+  display:block;
+}
+.logo__text{display:flex;flex-direction:column;line-height:1.15;}
+.logo__text b{font-size:15.5px;font-weight:700;letter-spacing:.01em;}
+.logo__text span{font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+
+.nav__menu{display:flex;align-items:center;gap:6px;}
+.nav__menu a{
+  position:relative;padding:9px 14px;border-radius:9px;
+  font-size:14.5px;font-weight:500;color:var(--muted);
+  transition:color .25s,background .25s;
+}
+.nav__menu a:hover{color:var(--text);background:rgba(255,255,255,.05);}
+
+.nav__right{display:flex;align-items:center;gap:14px;flex-shrink:0;}
+.lang{
+  display:flex;align-items:center;gap:4px;padding:5px;
+  border:1px solid var(--border);border-radius:9px;font-size:12.5px;
+}
+.lang button{
+  padding:5px 10px;border:0;background:transparent;border-radius:6px;
+  color:var(--muted);cursor:pointer;font-weight:600;transition:.25s;
+}
+.lang button.is-active{background:rgba(255,255,255,.09);color:var(--text);}
+.nav__cta{padding:11px 20px;font-size:14px;}
+
+.burger{
+  display:none;width:42px;height:42px;border:1px solid var(--border);
+  border-radius:10px;background:rgba(255,255,255,.03);cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+}
+.burger span{display:block;width:17px;height:1.6px;background:var(--text);border-radius:2px;transition:.3s var(--ease);}
+.burger.is-open span:nth-child(1){transform:translateY(6.6px) rotate(45deg);}
+.burger.is-open span:nth-child(2){opacity:0;}
+.burger.is-open span:nth-child(3){transform:translateY(-6.6px) rotate(-45deg);}
+
+.mobile-menu{
+  position:fixed;top:76px;left:0;right:0;z-index:190;
+  background:rgba(10,13,18,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  padding:20px var(--pad) 32px;
+  display:none;flex-direction:column;gap:4px;
+  transform:translateY(-12px);opacity:0;pointer-events:none;
+  transition:.35s var(--ease);
+}
+.mobile-menu.is-open{transform:none;opacity:1;pointer-events:auto;}
+.mobile-menu a{
+  padding:15px 4px;font-size:17px;font-weight:500;color:var(--muted);
+  border-bottom:1px solid var(--border);
+}
+.mobile-menu a:last-of-type{border-bottom:0;}
+.mobile-menu .btn{margin-top:18px;}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{
+  position:relative;
+  padding-top:150px;
+  padding-bottom:0;
+  overflow:hidden;
+}
+.hero__bg{
+  position:absolute;inset:0;pointer-events:none;z-index:0;
+}
+.hero__bg::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(70% 55% at 78% 18%,rgba(255,77,0,.16),transparent 62%),
+    radial-gradient(55% 45% at 12% 78%,rgba(0,212,255,.10),transparent 65%);
+}
+.hero__bg::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 20%,transparent 78%);
+}
+
+.hero__inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.06fr .94fr;
+  align-items:center;gap:clamp(32px,5vw,80px);
+  padding-bottom:clamp(48px,6vw,80px);
+}
+
+.hero h1{
+  font-size:clamp(34px,5.4vw,54px);
+  font-weight:700;line-height:1.08;letter-spacing:-.032em;
+  margin-bottom:26px;
+}
+.hero__sub{
+  font-size:clamp(15px,1.25vw,18.5px);
+  color:var(--muted);line-height:1.78;max-width:560px;/* ← 直接限制这段文字页头宽度的属性 */
+}
+.hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;}
+
+.hero__points{
+  display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:36px;
+  padding-top:26px;border-top:1px solid var(--border);
+}
+.hero__points li{
+  display:flex;align-items:center;gap:9px;
+  font-size:13.5px;color:var(--muted);font-weight:500;
+}
+.hero__points svg{width:15px;height:15px;color:var(--success);flex-shrink:0;}
+
+/* Hero 视觉 */
+.hero__visual{position:relative;display:grid;place-items:center;}
+.hero__glow{
+  position:absolute;width:78%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,77,0,.30),transparent 66%);
+  filter:blur(56px);z-index:0;
+}
+/* 展台主视觉容器 */
+.hero__frame{
+  position:relative;z-index:1;width:100%;max-width:520px;
+  padding-top:20px;                    /* 顶部留白，动画上浮不贴边 */
+  animation:floatY 7s ease-in-out infinite;
+}
+.hero__frame svg{width:100%;height:auto;}
+
+/* 上下轻微浮动 */
+@keyframes floatY{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+
+/* 橙色结构线呼吸 */
+.hero__frame .glow-line{
+  animation:pulseLine 3.6s ease-in-out infinite;
+}
+@keyframes pulseLine{
+  0%,100%{opacity:.82;}
+  50%{opacity:1;}
+}
+
+/* 射灯光锥明暗 */
+.hero__frame .beam{
+  animation:beamPulse 4.2s ease-in-out infinite;
+}
+@keyframes beamPulse{
+  0%,100%{opacity:.65;}
+  50%{opacity:1;}
+}
+
+/* 六束光锥交错节奏，避免同时亮 */
+.hero__frame .beam:nth-child(2){animation-delay:-.7s;}
+.hero__frame .beam:nth-child(3){animation-delay:-1.4s;}
+.hero__frame .beam:nth-child(4){animation-delay:-2.1s;}
+.hero__frame .beam:nth-child(5){animation-delay:-2.8s;}
+.hero__frame .beam:nth-child(6){animation-delay:-3.5s;}
+
+.hero-badge{
+  position:absolute;z-index:2;
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;border-radius:13px;
+  background:rgba(18,24,32,.86);
+  border:1px solid var(--border-strong);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  box-shadow:0 18px 40px -20px rgba(0,0,0,.9);
+  font-size:12.5px;font-weight:600;white-space:nowrap;
+  animation:floatY 7s ease-in-out infinite;
+}
+.hero-badge i{
+  width:8px;height:8px;border-radius:50%;background:var(--success);
+  box-shadow:0 0 0 3px rgba(34,197,94,.18);
+}
+.hero-badge b{color:var(--brand);font-weight:700;}
+.hero-badge--1{top:14%;left:-4%;animation-delay:-2s;}
+.hero-badge--2{bottom:16%;right:-3%;animation-delay:-4s;}
+.hero-badge--2 i{background:var(--accent);box-shadow:0 0 0 3px rgba(0,212,255,.16);}
+
+/* 数据条 */
+.stats{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--border);
+}
+.stats__item{
+  padding:34px 8px 38px;
+  text-align:center;position:relative;
+}
+.stats__item+.stats__item::before{
+  content:"";position:absolute;left:0;top:26%;height:48%;width:1px;background:var(--border);
+}
+.stats__num{
+  font-size:clamp(30px,3.4vw,46px);font-weight:800;letter-spacing:-.03em;
+  line-height:1;font-variant-numeric:tabular-nums;
+}
+.stats__num em{font-style:normal;color:var(--brand);}
+.stats__label{
+  margin-top:12px;font-size:12.5px;color:var(--muted);
+  letter-spacing:.06em;
+}
+
+/* ============================================================
+   行业信任条
+   ============================================================ */
+.trust{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding-block:30px;background:rgba(18,24,32,.5);
+}
+.trust__inner{
+  display:flex;align-items:center;gap:clamp(20px,4vw,48px);flex-wrap:wrap;
+  justify-content:center;
+}
+.trust__label{
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;white-space:nowrap;
+}
+.trust__list{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+}
+.trust__list span{
+  padding:8px 16px;border:1px solid var(--border);border-radius:100px;
+  font-size:13px;color:#c3ccd8;font-weight:500;
+  transition:.3s var(--ease);
+}
+.trust__list span:hover{border-color:rgba(255,77,0,.5);color:#fff;background:var(--brand-soft);}
+
+/* ============================================================
+   痛点卡片
+   ============================================================ */
+.pain-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  counter-reset:pain;                 /* 编号计数器 */
+}
+.pain{
+  position:relative;overflow:hidden;
+  padding:32px 28px 30px;
+  background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);
+  transition:transform .4s var(--ease),border-color .4s,background .4s;
+
+  /* 图标 + 编号 + 标题同一行，描述独立成行 */
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  grid-template-areas:
+    "icon  no    title"
+    "desc  desc  desc";
+  column-gap:16px;
+  row-gap:20px;
+  align-items:center;
+
+  counter-increment:pain;             /* 每张卡片编号递增 */
+}
+.pain::before{
+  content:counter(pain, decimal-leading-zero);
+  grid-area:no;
+  font-size:12px;font-weight:700;letter-spacing:.14em;
+  color:#3d4a5a;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+}
+.pain::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(120% 90% at 50% -10%,rgba(255,77,0,.14),transparent 60%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.pain:hover{transform:translateY(-6px);border-color:rgba(255,77,0,.35);}
+.pain:hover::after{opacity:1;}
+.pain__icon{
+  grid-area:icon;
+  width:44px;height:44px;border-radius:12px;
+  margin-bottom:0;                    /* 原来 22px，改为 0 */
+  display:grid;place-items:center;
+  background:var(--brand-soft);color:var(--brand);
+  border:1px solid rgba(255,77,0,.22);
+}
+.pain__icon svg{width:21px;height:21px;}
+.pain h3{
+  grid-area:title;
+  font-size:16px;font-weight:600;color:#fff;
+  margin-bottom:0;                    /* 原来 12px，改为 0 */
+    display:flex;align-items:center;
+}
+
+.pain__answer{
+  grid-area:desc;
+  font-size:14.5px;color:var(--muted);line-height:1.72;position:relative;z-index:1;
+}
+.pain__answer b{color:#e6ebf2;font-weight:600;}
+
+/* ============================================================
+   服务矩阵
+   ============================================================ */
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+/* 卡片布局：图标 + 编号 + 标题同一行，描述和链接各占一行 */
+.service{
+  position:relative;overflow:hidden;
+  padding:34px 30px 30px;
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:linear-gradient(165deg,rgba(23,31,42,.9),rgba(14,19,26,.9));
+  transition:transform .45s var(--ease),border-color .45s;
+  min-height:236px;
+
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  grid-template-rows:auto 1fr auto;
+  grid-template-areas:
+    "icon  no    title"
+    "desc  desc  desc"
+    "link  link  link";
+  column-gap:12px;
+  row-gap:18px;
+  align-items:center;
+}
+.service:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.22);}
+
+.service__ico{
+  grid-area:icon;
+  width:40px;height:40px;border-radius:11px;
+  display:grid;place-items:center;
+  background:rgba(0,212,255,.09);color:var(--accent);
+  border:1px solid rgba(0,212,255,.18);
+  margin:0;
+}
+.service__ico svg{width:20px;height:20px;}
+
+.service__no{
+  grid-area:no;
+  font-size:12px;font-weight:700;letter-spacing:.14em;
+  color:#3d4a5a;
+  margin:0;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+}
+
+.service h3{
+  grid-area:title;
+  font-size:19px;font-weight:700;letter-spacing:-.01em;
+  margin-bottom:0;
+}
+
+.service p{
+  grid-area:desc;
+  font-size:14px;color:var(--muted);line-height:1.72;
+  margin-bottom:0;
+}
+
+.service__link{
+  grid-area:link;
+  align-self:end;
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13.5px;font-weight:600;color:var(--brand);
+}
+.service__link svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+.service:hover .service__link svg{transform:translateX(4px);}
+
+/* ============================================================
+   案例
+   ============================================================ */
+.case-toolbar{
+  display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px;
+}
+.filter{
+  padding:9px 18px;border-radius:100px;cursor:pointer;
+  background:transparent;border:1px solid var(--border);
+  font-size:13.5px;font-weight:500;color:var(--muted);
+  transition:.28s var(--ease);
+}
+.filter:hover{color:var(--text);border-color:var(--border-strong);}
+.filter.is-active{background:var(--text);border-color:var(--text);color:#0A0D12;font-weight:600;}
+
+.cases{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:22px;
+}
+.case{
+  border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--border);background:var(--surface);
+  transition:transform .45s var(--ease),border-color .45s;
+  cursor:pointer;
+}
+.case:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.22);}
+
+.case__thumb{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  background:#0c1117;
+}
+.case__thumb::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(110% 85% at 18% 8%,var(--c1,rgba(255,77,0,.42)),transparent 56%),
+    radial-gradient(100% 80% at 88% 92%,var(--c2,rgba(0,212,255,.26)),transparent 58%),
+    linear-gradient(158deg,#1a2431,#0a0f15);
+  transition:transform .8s var(--ease);
+}
+.case:hover .case__thumb::before{transform:scale(1.06);}
+.case__thumb::after{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:42px 42px;
+  opacity:.6;
+}
+.case__tag{
+  position:absolute;z-index:2;top:16px;left:16px;
+  padding:6px 13px;border-radius:100px;font-size:11.5px;font-weight:600;
+  background:rgba(10,13,18,.7);border:1px solid var(--border-strong);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  letter-spacing:.04em;
+}
+.case__meta{
+  position:absolute;z-index:2;bottom:14px;left:16px;right:16px;
+  display:flex;gap:16px;font-size:12px;color:#cfd6e0;font-weight:500;
+}
+.case__meta span{display:flex;align-items:center;gap:6px;}
+.case__meta svg{width:13px;height:13px;opacity:.7;}
+
+.case__body{padding:24px 24px 26px;}
+.case__body h3{
+  font-size:17.5px;font-weight:700;letter-spacing:-.01em;margin-bottom:9px;
+}
+.case__body p{font-size:13.8px;color:var(--muted);line-height:1.7;}
+.case__result{
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:9px;
+  font-size:13px;font-weight:600;color:var(--success);
+}
+.case__result svg{width:15px;height:15px;flex-shrink:0;}
+
+/* ============================================================
+   交付流程
+   ============================================================ */
+.process{position:relative;}
+.process__line{
+  position:absolute;left:0;right:0;top:26px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border-strong) 8%,var(--border-strong) 92%,transparent);
+}
+.process__grid{
+  position:relative;
+  display:grid;grid-template-columns:repeat(8,1fr);gap:8px;
+}
+.step{text-align:left;}
+.step__dot{
+  width:13px;height:13px;border-radius:50%;
+  background:var(--bg);border:1.6px solid #2c3744;
+  margin-bottom:26px;position:relative;
+  transition:.4s var(--ease);
+}
+.step__dot::after{
+  content:"";position:absolute;inset:3px;border-radius:50%;
+  background:#2c3744;transition:.4s var(--ease);
+}
+.step:hover .step__dot{border-color:var(--brand);box-shadow:0 0 0 6px rgba(255,77,0,.12);}
+.step:hover .step__dot::after{background:var(--brand);}
+.step__no{
+  font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--brand);
+  margin-bottom:9px;
+}
+.step h4{font-size:14.5px;font-weight:600;margin-bottom:9px;line-height:1.35;}
+.step p{font-size:12.5px;color:var(--muted);line-height:1.62;}
+
+/* ============================================================
+   保障体系
+   ============================================================ */
+.guarantee{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,80px);
+  align-items:start;
+}
+.guarantee__list{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+}
+
+/* 保障卡片：图标 + 标题同一行，描述独立成行 */
+.gitem{
+  background:var(--bg);padding:30px 28px;
+  transition:background .35s;
+
+  display:grid;
+  grid-template-columns:auto 1fr;
+  grid-template-areas:
+    "icon  title"
+    "desc  desc";
+  column-gap:14px;
+  row-gap:16px;
+  align-items:center;
+}
+.gitem:hover{background:var(--surface-2);}
+
+.gitem__ico{
+  grid-area:icon;
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;
+  background:rgba(34,197,94,.1);color:var(--success);
+  border:1px solid rgba(34,197,94,.2);
+  margin-bottom:0;                    /* 原来 18px，改为 0 */
+}
+.gitem__ico svg{width:18px;height:18px;}
+
+.gitem h4{
+  grid-area:title;
+  font-size:15.5px;font-weight:600;
+  margin-bottom:0;                    /* 原来 9px，改为 0 */
+}
+
+.gitem p{
+  grid-area:desc;
+  font-size:13.5px;color:var(--muted);line-height:1.68;
+}
+
+.guarantee__cta{
+  margin-top:32px;padding:26px 28px;border-radius:var(--radius);
+  border:1px solid rgba(255,77,0,.28);
+  background:linear-gradient(140deg,rgba(255,77,0,.1),rgba(255,77,0,.02));
+}
+.guarantee__cta p{font-size:14.5px;color:#d7dde6;line-height:1.72;margin-bottom:20px;}
+
+.guarantee__cta .btn{
+  display:flex;
+  width:fit-content;
+  margin-left:auto;
+}
+/* ============================================================
+   客户评价
+   ============================================================ */
+.quotes{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;
+}
+.quote{
+  padding:34px 30px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--surface);
+  display:flex;flex-direction:column;
+  transition:transform .4s var(--ease),border-color .4s;
+}
+.quote:hover{transform:translateY(-5px);border-color:var(--border-strong);}
+.quote__mark{
+  font-size:44px;line-height:1;color:var(--brand);opacity:.5;
+  font-weight:800;margin-bottom:18px;font-family:Georgia,serif;
+}
+.quote p{
+  font-size:15px;line-height:1.8;color:#dbe1e9;margin-bottom:26px;flex:1;
+}
+.quote__by{display:flex;align-items:center;gap:13px;padding-top:20px;border-top:1px solid var(--border);}
+.quote__av{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(140deg,#2a3543,#161d26);
+  display:grid;place-items:center;font-weight:700;font-size:14px;color:#8f9dae;
+  border:1px solid var(--border);
+}
+.quote__by b{display:block;font-size:14px;font-weight:600;}
+.quote__by span{font-size:12.5px;color:var(--muted);}
+
+/* ============================================================
+   洞察
+   ============================================================ */
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;}
+.insight{
+  padding:30px 28px;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--surface);
+  display:flex;flex-direction:column;gap:16px;
+  transition:transform .4s var(--ease),border-color .4s,background .4s;
+}
+.insight:hover{transform:translateY(-5px);border-color:rgba(0,212,255,.3);background:var(--surface-2);}
+.insight__tag{
+  align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--accent);
+  padding:5px 11px;border-radius:6px;background:rgba(0,212,255,.09);
+}
+.insight h3{font-size:17px;font-weight:600;line-height:1.45;letter-spacing:-.01em;}
+.insight p{font-size:13.8px;color:var(--muted);line-height:1.7;flex:1;}
+.insight__more{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13.5px;font-weight:600;color:var(--text);
+}
+.insight__more svg{width:14px;height:14px;transition:transform .3s var(--ease);}
+.insight:hover .insight__more svg{transform:translateX(4px);}
+
+/* ============================================================
+   表单 CTA
+   ============================================================ */
+.contact{
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(60% 70% at 88% 12%,rgba(255,77,0,.16),transparent 60%),
+    radial-gradient(50% 60% at 6% 92%,rgba(0,212,255,.09),transparent 62%),
+    var(--surface);
+  border-top:1px solid var(--border);
+}
+.contact__inner{
+  display:grid;grid-template-columns:.85fr 1.15fr;
+  gap:clamp(36px,5vw,76px);align-items:start;
+}
+.contact h2{
+  font-size:clamp(26px,3.4vw,44px);
+  font-weight:700;line-height:1.16;letter-spacing:-.025em;margin-bottom:22px;
+}
+.contact__desc{font-size:15.5px;color:var(--muted);line-height:1.78;margin-bottom:34px;}
+.contact__points{display:flex;flex-direction:column;gap:15px;margin-bottom:34px;}
+.contact__points li{
+  display:flex;gap:12px;font-size:14.5px;color:#cbd3dd;line-height:1.6;
+}
+.contact__points svg{width:17px;height:17px;color:var(--success);flex-shrink:0;margin-top:3px;}
+.contact__info{
+  padding-top:26px;border-top:1px solid var(--border);
+  display:flex;flex-direction:column;gap:14px;
+}
+.contact__info a,.contact__info span{
+  display:flex;align-items:center;gap:11px;
+  font-size:14.5px;color:var(--muted);transition:color .25s;
+}
+.contact__info a:hover{color:var(--brand);}
+.contact__info svg{width:16px;height:16px;flex-shrink:0;color:#5a6675;}
+
+.form-card{
+  padding:clamp(26px,3vw,40px);
+  border-radius:var(--radius);
+  background:rgba(10,13,18,.72);
+  border:1px solid var(--border-strong);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.95);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.field{display:flex;flex-direction:column;gap:9px;}
+.field--full{grid-column:1/-1;}
+.field label{font-size:12.5px;font-weight:600;color:var(--muted);letter-spacing:.02em;}
+.field label em{font-style:normal;color:var(--brand);margin-left:3px;}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 15px;
+  background:rgba(255,255,255,.032);
+  border:1px solid var(--border);border-radius:var(--radius-xs);
+  font-size:14.5px;color:var(--text);outline:none;
+  transition:border-color .25s,background .25s,box-shadow .25s;
+  font-family:inherit;
+}
+.field textarea{resize:vertical;min-height:96px;line-height:1.65;}
+.field input::placeholder,.field textarea::placeholder{color:#5b6675;}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:rgba(255,77,0,.65);
+  background:rgba(255,77,0,.05);
+  box-shadow:0 0 0 4px rgba(255,77,0,.1);
+}
+.field select{appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239AA4B2' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;padding-right:42px;
+}
+.field select option{background:#121820;color:#F5F7FA;}
+.form-foot{
+  grid-column:1/-1;display:flex;flex-direction:column;gap:16px;margin-top:4px;
+}
+.form-note{font-size:12.5px;color:#6b7787;line-height:1.6;text-align:center;}
+.form-note b{color:var(--brand);}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.site-footer{
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  padding-top:clamp(56px,6vw,80px);
+}
+.footer__grid{
+  display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;
+  gap:clamp(28px,4vw,56px);
+  padding-bottom:56px;
+}
+.footer__brand p{
+  margin-top:20px;font-size:14px;color:var(--muted);line-height:1.75;max-width:320px;
+}
+.footer__social{display:flex;gap:10px;margin-top:26px;}
+.footer__social a{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  border:1px solid var(--border);color:var(--muted);
+  transition:.3s var(--ease);
+}
+.footer__social a:hover{border-color:var(--brand);color:var(--brand);background:var(--brand-soft);transform:translateY(-3px);}
+.footer__social svg{width:17px;height:17px;}
+.footer__col h5{
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:#7d8896;margin-bottom:22px;
+}
+.footer__col ul{display:flex;flex-direction:column;gap:13px;}
+.footer__col a{font-size:14px;color:var(--muted);transition:color .25s,padding-left .25s;}
+.footer__col a:hover{color:var(--brand);padding-left:4px;}
+.footer__bottom{
+  border-top:1px solid var(--border);
+  padding-block:26px;
+  display:flex;flex-wrap:wrap;gap:16px;
+  align-items:center;justify-content:space-between;
+  font-size:13px;color:#6b7787;
+}
+.footer__bottom nav{display:flex;gap:22px;flex-wrap:wrap;}
+.footer__bottom a:hover{color:var(--text);}
+
+/* ============================================================
+   动效
+   ============================================================ */
+.reveal{
+  opacity:0;transform:translateY(26px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+}
+.reveal.is-visible{opacity:1;transform:none;}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important;
+  }
+  .reveal{opacity:1;transform:none;}
+}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width:1180px){
+  .nav__menu{gap:0;}
+  .nav__menu a{padding:9px 10px;font-size:14px;}
+  .process__grid{grid-template-columns:repeat(4,1fr);gap:34px 12px;}
+  .process__line{display:none;}
+}
+
+@media (max-width:1000px){
+  .nav__menu{display:none;}
+  .burger{display:flex;}
+  .mobile-menu{display:flex;}
+  .nav__cta{display:none;}
+
+  .hero{padding-top:126px;}
+  .hero__inner{grid-template-columns:1fr;gap:52px;}
+  .hero__visual{order:-1;max-width:460px;margin-inline:auto;}
+  .hero__sub{max-width:none;}
+    .hero-badge--1{left:-2%;}
+  .hero-badge--2{right:-2%;bottom:3%;}
+
+  .pain-grid{grid-template-columns:repeat(2,1fr);}   /* 新增 */
+  .services{grid-template-columns:repeat(2,1fr);} /* 新增 */
+
+  .guarantee{grid-template-columns:1fr;}
+  .contact__inner{grid-template-columns:1fr;}
+  .footer__grid{grid-template-columns:1fr 1fr;}
+  .footer__brand{grid-column:1/-1;}
+}
+
+@media (max-width:760px){
+  .stats{grid-template-columns:1fr 1fr;}
+  .stats__item{padding:26px 8px 28px;}
+  .stats__item:nth-child(odd)::before{display:none;}
+  .stats__item:nth-child(3)::before,
+  .stats__item:nth-child(4)::before{display:block;}
+  .stats__item:nth-child(1),.stats__item:nth-child(2){border-bottom:1px solid var(--border);}
+  .form-note .note-break{display:block;}
+  .process__grid{grid-template-columns:repeat(2,1fr);}
+
+#pain .section-head h2{
+  font-size:clamp(18px, 6.2vw, 24px);
+  white-space:nowrap;
+}
+  /* 新增：交付流程卡片，圆点与编号同一行 */
+  .step{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    grid-template-areas:
+      "dot   no"
+      "title title"
+      "desc  desc";
+    column-gap:10px;
+    row-gap:8px;
+    align-items:center;
+  }
+  .step__dot{
+    grid-area:dot;
+    margin-bottom:0;
+  }
+  .step__no{
+    grid-area:no;
+    margin-bottom:0;
+  }
+  .step h4{
+    grid-area:title;
+    margin-bottom:0;
+  }
+  .step p{
+    grid-area:desc;
+  }
+  /* 新增结束 */
+
+  .guarantee__list{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .cases{grid-template-columns:1fr;}
+
+  .hero__cta .btn{flex:1 1 100%;}
+  .hero__points{gap:12px;}
+  .hero__points li{flex:1 1 100%;}
+  .hero h1{
+    font-size:clamp(24px, 7vw, 34px);
+  }
+  .hero h1 .grad{
+    white-space:nowrap;
+  }
+
+  .pain-grid{grid-template-columns:1fr;}
+  .services{grid-template-columns:1fr;}
+  
+
+  .quote,.insight,.service{padding:26px 22px;}
+  .case__body{padding:22px 20px 24px;}
+}
+
+@media (max-width:520px){
+  .footer__grid{grid-template-columns:1fr;}
+  .trust__inner{gap:16px;}
+  .footer__bottom{justify-content:center;text-align:center;}
+
+  /* 页脚三个栏目的选项在移动端排成两列 */
+  .footer__col ul{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px 16px;
+  }
+.contact__info .addr-sub{display:block;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ======================= HEADER ======================= -->
+<header class="site-header" id="header">
+  <div class="container">
+    <nav class="nav" aria-label="主导航">
+      <a href="#" class="logo" aria-label="深圳市格众展览策划有限公司">
+       <svg class="logo__mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="格众展览">
+  <!-- 黄色上弧：收尾线与蓝条等宽（30） -->
+  <path d="M 12,100 A 88,88 0 0 1 188,92 L 158,92 A 58,58 0 0 0 42,100 Z" fill="#F0B400"/>
+  <!-- 蓝色横条 -->
+  <rect x="16" y="100" width="150" height="18" fill="#1565A0"/>
+  <!-- 蓝色下弧 -->
+  <path d="M 12,100 A 88,88 0 0 0 188,100 L 158,100 A 58,58 0 0 1 42,100 Z" fill="#1565A0"/>
+  <!-- 左侧黄色外层三角形 -->
+  <polygon points="12,118 88,118 50,42" fill="#F0B400"/>
+  <!-- 左侧蓝色内层三角形 -->
+  <polygon points="30,118 70,118 50,68" fill="#1565A0"/>
+</svg>
+        <span class="logo__text">
+          <b>格众展览·展示</b>
+          <span> GEZHONG EXPO</span>
+        </span>
+      </a>
+
+      <div class="nav__menu">
+       <a href="#process">交付流程</a>
+  <a href="#pain">避坑指南</a><!--"#insights" -->
+        <a href="#cases">案例作品</a>
+        <a href="#services">服务能力</a>
+        <a href="#guarantee">保障体系</a>
+        <a href="#insights">客户评价</a>
+        <a href="#contact">联系我们</a>
+      </div>
+
+      <div class="nav__right">
+        <div class="lang" role="group" aria-label="语言切换">
+          <button type="button" class="is-active">中文</button>
+          <button type="button">EN</button>
+        </div>
+        <a href="#contact" class="btn btn--primary nav__cta">获取方案预算</a>
+        <button class="burger" id="burger" aria-label="打开菜单" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- 移动端菜单 -->
+<div class="mobile-menu" id="mobileMenu">
+<a href="#process">交付流程</a>
+  <a href="#pain">避坑指南</a><!--"#insights" -->
+  <a href="#cases">案例作品</a>
+  <a href="#services">服务能力</a>
+  <a href="#guarantee">保障体系</a>
+  <a href="#contact">联系我们</a>
+  <a href="#contact" class="btn btn--primary btn--block">获取展台方案与预算</a>
+</div>
+
+<main>
+
+<!-- ======================= HERO ======================= -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <span class="eyebrow reveal">全球展台设计搭建 · 一站式交付</span>
+
+      <h1 class="reveal" style="transition-delay:.06s">
+        让品牌在展会现场<br>
+        <span class="grad">被看见、被记住、被成交。</span>
+      </h1>
+
+      <p class="hero__sub reveal" style="transition-delay:.12s">
+       从创意设计、报馆审批到落地搭建, 深圳格众展览策划有限公司
+       为参展企业提供确定性的展台交付,  不超预算、不误工期、不掉链子。
+      </p>
+
+      <div class="hero__cta reveal" style="transition-delay:.18s">
+        <a href="#contact" class="btn btn--primary">
+          获取展台方案与预算
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#cases" class="btn btn--ghost">查看同类案例</a>
+      </div>
+
+      <ul class="hero__points reveal" style="transition-delay:.24s">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          1:1 工厂预搭验收
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          清单报价 · 杜绝现场增项
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          本地报馆团队 · 避免重复审核
+        </li>
+      </ul>
+    </div>
+
+    <!-- 视觉 -->
+    <div class="hero__visual reveal" style="transition-delay:.14s">
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="hero__frame">
+  <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="等距视角展台结构示意图">
+    <defs>
+      <linearGradient id="floorTop" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1c2634"/>
+        <stop offset="1" stop-color="#0f151d"/>
+      </linearGradient>
+      <linearGradient id="wallLeft" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1e2937"/>
+        <stop offset="1" stop-color="#111821"/>
+      </linearGradient>
+      <linearGradient id="wallRight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#243040"/>
+        <stop offset="1" stop-color="#141c26"/>
+      </linearGradient>
+      <linearGradient id="orangeLine" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#FF4D00"/>
+        <stop offset="1" stop-color="#FFA05C"/>
+      </linearGradient>
+      <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#FF4D00" stop-opacity=".18"/>
+        <stop offset="1" stop-color="#FF4D00" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="screenGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00D4FF" stop-opacity=".18"/>
+        <stop offset="1" stop-color="#00D4FF" stop-opacity=".05"/>
+      </linearGradient>
+      <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="6" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <radialGradient id="floorGlow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#FF4D00" stop-opacity=".22"/>
+        <stop offset="1" stop-color="#FF4D00" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <g transform="translate(0, 18)">
+
+      <!-- 地面光晕 -->
+      <ellipse cx="260" cy="385" rx="215" ry="46" fill="url(#floorGlow)"/>
+
+      <!-- 地台 -->
+      <polygon points="260,240 410,310 260,380 110,310" fill="url(#floorTop)" stroke="rgba(255,255,255,.12)" stroke-width="1.2"/>
+      <polygon points="110,310 260,380 260,394 110,324" fill="#0a0f15" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+      <polygon points="260,380 410,310 410,324 260,394" fill="#0c1219" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+
+      <!-- 左右背墙 -->
+      <polygon points="260,240 110,310 110,170 260,100" fill="url(#wallLeft)" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+      <polygon points="260,240 410,310 410,170 260,100" fill="url(#wallRight)" stroke="rgba(255,255,255,.1)" stroke-width="1.2"/>
+
+      <!-- 墙面分格线 -->
+      <g stroke="rgba(255,255,255,.045)" stroke-width="1">
+        <line x1="150" y1="303" x2="150" y2="163"/>
+        <line x1="190" y1="284" x2="190" y2="144"/>
+        <line x1="230" y1="265" x2="230" y2="125"/>
+        <line x1="290" y1="265" x2="290" y2="125"/>
+        <line x1="330" y1="284" x2="330" y2="144"/>
+        <line x1="370" y1="303" x2="370" y2="163"/>
+      </g>
+
+      <!-- 左墙：两块品牌展示板 -->
+      <g>
+        <polygon points="172,168 126,190 126,262 172,240" fill="#1a2330" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <polygon points="172,168 126,190 126,196 172,174" fill="rgba(255,77,0,.62)"/>
+        <polygon points="160,196 138,206 138,224 160,214" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.3"/>
+        <polygon points="156,200 142,207 142,218 156,211" fill="rgba(255,77,0,.58)"/>
+        <line x1="134" y1="234" x2="164" y2="220" stroke="rgba(255,255,255,.24)" stroke-width="1.6"/>
+        <line x1="134" y1="242" x2="156" y2="232" stroke="rgba(255,255,255,.15)" stroke-width="1.3"/>
+        <line x1="134" y1="250" x2="146" y2="244" stroke="rgba(255,255,255,.09)" stroke-width="1.1"/>
+      </g>
+
+      <g>
+        <polygon points="228,142 182,164 182,226 228,204" fill="#1a2330" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+        <polygon points="228,142 182,164 182,170 228,148" fill="rgba(255,77,0,.62)"/>
+        <polygon points="200,172 188,178 188,196 200,190" fill="rgba(0,212,255,.14)" stroke="rgba(0,212,255,.42)" stroke-width="1"/>
+        <polygon points="222,162 210,168 210,186 222,180" fill="rgba(0,212,255,.14)" stroke="rgba(0,212,255,.42)" stroke-width="1"/>
+        <line x1="188" y1="204" x2="220" y2="189" stroke="rgba(255,255,255,.2)" stroke-width="1.4"/>
+        <line x1="188" y1="212" x2="208" y2="203" stroke="rgba(255,255,255,.1)" stroke-width="1.1"/>
+      </g>
+
+      <!-- 右墙 LED 显示屏 -->
+      <polygon points="308,156 384,192 384,260 308,224" fill="#0a121c" stroke="rgba(0,212,255,.5)" stroke-width="1.6"/>
+      <polygon points="312,161 380,194 380,255 312,222" fill="url(#screenGrad)"/>
+      <polygon points="312,161 380,194 380,201 312,168" fill="rgba(0,212,255,.55)"/>
+      <line x1="320" y1="180" x2="368" y2="202" stroke="rgba(0,212,255,.6)" stroke-width="1.8"/>
+      <line x1="320" y1="190" x2="358" y2="207" stroke="rgba(0,212,255,.38)" stroke-width="1.4"/>
+      <line x1="320" y1="200" x2="348" y2="212" stroke="rgba(0,212,255,.26)" stroke-width="1.2"/>
+      <polygon points="325,214 332,217 332,236 325,233" fill="rgba(0,212,255,.55)"/>
+      <polygon points="338,220 345,223 345,246 338,243" fill="rgba(0,212,255,.72)"/>
+      <polygon points="351,226 358,229 358,242 351,239" fill="rgba(0,212,255,.45)"/>
+      <polygon points="312,161 380,194 380,255 312,222" fill="none" stroke="rgba(0,212,255,.35)" stroke-width="1"/>
+
+      <!-- 顶部橙色结构线（呼吸） -->
+      <polyline class="glow-line" points="110,170 260,100 410,170" fill="none" stroke="url(#orangeLine)" stroke-width="2.6" stroke-linejoin="round" filter="url(#glow)"/>
+      <line class="glow-line" x1="260" y1="100" x2="260" y2="240" stroke="url(#orangeLine)" stroke-width="2.2" filter="url(#glow)"/>
+
+      <!-- 顶部灯架 -->
+      <g>
+        <polyline points="110,156 260,86 410,156" fill="none" stroke="rgba(255,255,255,.32)" stroke-width="1.8"/>
+        <polyline points="110,170 260,100 410,170" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.4"/>
+        <line x1="110" y1="170" x2="110" y2="156" stroke="rgba(255,255,255,.28)" stroke-width="1.6"/>
+        <line x1="260" y1="100" x2="260" y2="86" stroke="rgba(255,255,255,.28)" stroke-width="1.6"/>
+        <line x1="410" y1="170" x2="410" y2="156" stroke="rgba(255,255,255,.28)" stroke-width="1.6"/>
+      </g>
+
+      <!-- 射灯光锥（左右各 3 束） -->
+      <g class="beams">
+        <polygon class="beam" points="145,126 120,270 170,270" fill="url(#beamGrad)"/>
+        <polygon class="beam" points="195,102 172,250 218,250" fill="url(#beamGrad)"/>
+        <polygon class="beam" points="240,81 220,230 260,230" fill="url(#beamGrad)"/>
+        <polygon class="beam" points="280,81 260,230 300,230" fill="url(#beamGrad)"/>
+        <polygon class="beam" points="325,102 302,250 348,250" fill="url(#beamGrad)"/>
+        <polygon class="beam" points="375,126 350,270 400,270" fill="url(#beamGrad)"/>
+      </g>
+
+      <!-- 射灯灯头（左右各 3 个，r=3.5） -->
+      <g class="spots">
+        <circle cx="145" cy="126" r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+        <circle cx="195" cy="102" r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+        <circle cx="240" cy="81"  r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+        <circle cx="280" cy="81"  r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+        <circle cx="325" cy="102" r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+        <circle cx="375" cy="126" r="3.5" fill="#FF4D00" filter="url(#glow)"/>
+      </g>
+
+      <!-- ================= 接待台（重新设计：缩窄宽度方向） ================= -->
+<g>
+  <!-- 台面 -->
+  <polygon points="228,320 288,290 318,305 258,335" fill="#263242" stroke="rgba(255,255,255,.14)" stroke-width="1.2"/>
+  <!-- 左侧面（短边，暗面） -->
+  <polygon points="228,320 258,335 258,373 228,358" fill="#131b25" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <!-- 右侧面（长边，主面） -->
+  <polygon points="258,335 318,305 318,343 258,373" fill="#1c2634" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <!-- 右侧面装饰分格线 -->
+  <line x1="260" y1="355" x2="316" y2="327" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+  <!-- 橙色亮条：长边（右侧面）顶边 -->
+  <line class="glow-line" x1="258" y1="335" x2="318" y2="305" stroke="url(#orangeLine)" stroke-width="2.4" filter="url(#glow)"/>
+</g>
+
+      <!-- 悬浮蓝色方块（品牌点缀） -->
+      <g opacity=".92" filter="url(#glow)">
+        <polygon points="432,96 470,115 432,134 394,115" fill="rgba(0,212,255,.24)" stroke="rgba(0,212,255,.8)" stroke-width="1.3"/>
+        <polygon points="394,115 432,134 432,168 394,149" fill="rgba(0,212,255,.11)" stroke="rgba(0,212,255,.45)" stroke-width="1.1"/>
+        <polygon points="432,134 470,115 470,149 432,168" fill="rgba(0,212,255,.17)" stroke="rgba(0,212,255,.45)" stroke-width="1.1"/>
+      </g>
+
+    </g>
+  </svg>
+</div>
+
+      <div class="hero-badge hero-badge--1"><i></i> 准时交付率 <b>99%</b></div>
+      <div class="hero-badge hero-badge--2"><i></i> 服务覆盖 <b>20+ 国家</b></div>
+    </div>
+  </div>
+
+  <!-- 数据条 -->
+  <div class="container">
+    <div class="stats reveal">
+      <div class="stats__item">
+        <div class="stats__num"><span data-count="20">0</span><em>+</em></div>
+        <div class="stats__label">服务国家与地区</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__num"><span data-count="1000">0</span><em>+</em></div>
+        <div class="stats__label">品牌展台交付</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__num"><span data-count="99">0</span><em>%</em></div>
+        <div class="stats__label">准时交付率</div>
+      </div>
+      <div class="stats__item">
+        <div class="stats__num"><span data-count="0">0</span><em></em></div>
+        <div class="stats__label">安全事故</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 信任条 ======================= -->
+<section class="trust">
+  <div class="container trust__inner">
+    <span class="trust__label">深耕行业 · 服务领域</span>
+    <div class="trust__list">
+      <span>科技电子</span>
+      <span>橡胶橡塑</span>
+      <span>医疗医美</span>
+      <span>宠物礼品</span>
+      <span>新能源</span>
+      <span>工业制造</span>
+      <span>食品消费</span>
+      <span>跨境出海</span>
+      <span>活动会议美陈</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ======================= 痛点与解决方案 ======================= -->
+<section class="section" id="pain">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">展商最担心的问题</span>
+      <h2>展台出问题，从来不是设计问题，<br>而是交付的问题。</h2>
+      <p>我们做了十几年展台，听过太多客户走过的弯路。所以格众把每一个坑，都写进了标准流程里。</p>
+    </div>
+
+    <div class="pain-grid">
+      <article class="pain reveal">
+        <div class="pain__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>效果图很美，落地打折扣</h3>
+        <p class="pain__answer">我们坚持 <b>设计工程一体化</b>，设计阶段就由结构工程师介入，出厂前 <b>1:1 工厂预搭</b>，核验无误后再发运搭建，所见即所得。</p>
+      </article>
+
+      <article class="pain reveal" style="transition-delay:.06s">
+        <div class="pain__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>预算不透明，现场疯狂增项</h3>
+        <p class="pain__answer"><b>清单式报价</b>，主材、人工、运输、报馆分项列明；合同锁定范围，任何变更提前走书面签证，<b>现场零隐形增项收费</b>。</p>
+      </article>
+
+      <article class="pain reveal" style="transition-delay:.12s">
+        <div class="pain__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
+        </div>
+        <h3>报馆审批复杂，来回被退件</h3>
+        <p class="pain__answer">结构、消防、电气、材料证明全套资料由我方准备，<b>本地报馆团队</b>对接主办与场馆，高效通过，不占用耽误客户时间。</p>
+      </article>
+
+      <article class="pain reveal" style="transition-delay:.18s">
+        <div class="pain__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        </div>
+        <h3>工期失控，开展前还在赶工</h3>
+        <p class="pain__answer">工厂预制 + 现场装配，<b>看得见得进度进程节点管理</b>，关键节点提前 48 小时预警；预留应急班组，科学统筹游刃有余。</p>
+      </article>
+
+      <article class="pain reveal" style="transition-delay:.24s">
+        <div class="pain__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>现场突发，没人能马上处理</h3>
+        <p class="pain__answer">每个项目 <b>专属一对一项目经理</b>，展期驻场；备用灯具、耗材、五金与美工物料；全程投保展台责任险与意外险。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 交付流程 ======================= -->
+<section class="section section--alt" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">交付流程</span>
+      <h2>八步走完一个展台，<br>每一步都看得到有交付物。</h2>
+      <p>你看得见进度，也看得见责任。每个节点都有明确的时间、交付物和配合服务。</p>
+    </div>
+
+    <div class="process">
+      <div class="process__line" aria-hidden="true"></div>
+      <div class="process__grid">
+        <div class="step reveal">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 01</div>
+          <h4>需求诊断</h4>
+          <p>了解展位、目标、预算与品牌调性</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.04s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 02</div>
+          <h4>创意设计</h4>
+          <p>3D 效果图、动线方案、平面布局、品牌赋能</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.08s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 03</div>
+          <h4>预算报价</h4>
+          <p>清单式报价，逐项确定、透明无隐藏、无增项</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.12s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 04</div>
+          <h4>报馆审批</h4>
+          <p>结构、消防、电气全套资料代办</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.16s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 05</div>
+          <h4>工厂预制</h4>
+          <p>1:1 预搭核验，完美呈现落地</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.2s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 06</div>
+          <h4>现场搭建</h4>
+          <p>装配式施工，节点进度及时同步把控</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.24s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 07</div>
+          <h4>展期支持</h4>
+          <p>值班驻场增值服务，30 分钟响应</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.28s">
+          <div class="step__dot"></div>
+          <div class="step__no">STEP 08</div>
+          <h4>撤展复盘</h4>
+          <p>清场交付、物料回收、服务回访、效果复盘、长期维护</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 案例 ======================= -->
+<section class="section" id="cases">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">案例作品</span>
+      <h2>真实交付，比效果图更有说服力。</h2>
+      <p>每一个案例都提供"效果图 vs 实拍"对比。我们不怕对比，因为工厂预搭已经帮您验收过一次。</p>
+    </div>
+
+    <div class="case-toolbar reveal">
+      <button class="filter is-active" data-filter="all">全部</button>
+      <button class="filter" data-filter="tech">科技电子</button>
+      <button class="filter" data-filter="energy">新能源</button>
+      <button class="filter" data-filter="medical">医疗器械</button>
+      <button class="filter" data-filter="industry">工业制造</button>
+      <button class="filter" data-filter="tech">橡胶橡塑</button>
+     <button class="filter" data-filter="tech">宠物礼品</button>
+      <button class="filter" data-filter="energy">食品消费</button>
+      <button class="filter" data-filter="medical">跨境出海</button>
+      <button class="filter" data-filter="industry">活动会议美陈</button>
+    </div>
+
+    <div class="cases">
+      <article class="case reveal" data-category="energy" style="--c1:rgba(255,77,0,.45);--c2:rgba(255,180,80,.22)">
+        <div class="case__thumb">
+          <span class="case__tag">新能源</span>
+          <div class="case__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>120㎡</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>德国 · 汉诺威</span>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3>某储能品牌 · 汉诺威工业展</h3>
+          <p>双层结构 + 沉浸式光带动线，产品墙与洽谈区分离，兼顾展示与商务转化。</p>
+          <div class="case__result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg>
+            观众平均停留时长提升 42%
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" data-category="tech" style="--c1:rgba(0,212,255,.42);--c2:rgba(90,120,255,.24);transition-delay:.06s">
+        <div class="case__thumb">
+          <span class="case__tag">科技电子</span>
+          <div class="case__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>96㎡</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>美国 · 拉斯维加斯</span>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3>某智能硬件品牌 · CES</h3>
+          <p>模块化铝型材结构，可拆装复用三个展会，单次搭建成本下降约 30%。</p>
+          <div class="case__result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg>
+            现场留资量同比提升 65%
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" data-category="medical" style="--c1:rgba(34,197,94,.38);--c2:rgba(0,212,255,.2);transition-delay:.12s">
+        <div class="case__thumb">
+          <span class="case__tag">医疗器械</span>
+          <div class="case__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>72㎡</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>德国 · 杜塞尔多夫</span>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3>某医疗设备企业 · MEDICA</h3>
+          <p>洁净感白色基调 + 无主灯照明，设备演示区与私密洽谈区严格分区。</p>
+          <div class="case__result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg>
+            报馆一次通过 · 零整改
+          </div>
+        </div>
+      </article>
+
+      <article class="case reveal" data-category="industry" style="--c1:rgba(255,160,60,.4);--c2:rgba(255,77,0,.24);transition-delay:.18s">
+        <div class="case__thumb">
+          <span class="case__tag">工业制造</span>
+          <div class="case__meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>200㎡</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>上海 · 国家会展中心</span>
+          </div>
+        </div>
+        <div class="case__body">
+          <h3>某自动化集团 · 工业博览会</h3>
+          <p>承重结构专项设计，现场吊装三台大型设备，同步完成电气与气路接入。</p>
+          <div class="case__result">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v6h-6"/></svg>
+            提前 6 小时完成交付验收
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 服务矩阵 ======================= -->
+<section class="section section--alt" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">服务能力</span>
+      <h2>从一张图纸，到展会现场的最后一颗螺丝。</h2>
+      <p>六大核心服务模块，覆盖展台全过程周期。你可以全包给我们，也可以选择其中环节。</p>
+    </div>
+
+    <div class="services">
+      <article class="service reveal">
+        <span class="service__no">01</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3Z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5Z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <h3>展台创意设计</h3>
+        <p>不是好看，而是让观众停下来、走进来、留下线索。3D 效果图 +  动线规划 + 元素效果 一次交付。</p>
+        <span class="service__link">查看设计流程
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service reveal" style="transition-delay:.05s">
+        <span class="service__no">02</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>展台搭建施工</h3>
+        <p>自有工厂预制，现场装配式施工。木作、型材、桁架、灯光、美工全工序自有班组，质量可靠。</p>
+        <span class="service__link">了解施工标准
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service reveal" style="transition-delay:.1s">
+        <span class="service__no">03</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h4"/></svg>
+        </div>
+        <h3>报馆报批代办</h3>
+        <p>结构计算书、消防材料证明、电气图、施工资质全套代办。国内外主流展馆均有专业报馆通道。</p>
+        <span class="service__link">查看报馆清单
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service reveal" style="transition-delay:.15s">
+        <span class="service__no">04</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V9l6-4 6 4v11"/><path d="M16 20V12l4-2v10"/></svg>
+        </div>
+        <h3>工厂预制预搭</h3>
+        <p>自有制作工厂基地，出厂前 1:1 预搭验证结构与效果，确保高效无误，杜绝现场返工。</p>
+        <span class="service__link">预约参观工厂
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service reveal" style="transition-delay:.2s">
+        <span class="service__no">05</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M2 12h20M12 2c2.5 3 2.5 17 0 20M12 2c-2.5 3-2.5 17 0 20"/></svg>
+        </div>
+        <h3>全球巡展搭建</h3>
+        <p>可多国复用，模块化结构降低重复成本。覆盖德国、美国、中东、东南亚等主要展会市场。</p>
+        <span class="service__link">查看海外案例
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="service reveal" style="transition-delay:.25s">
+        <span class="service__no">06</span>
+        <div class="service__ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-5 3.5 3L21 6"/></svg>
+        </div>
+        <h3>展期运营支持</h3>
+        <p>展前服务、现场礼仪、物料补给、设备巡检、展期支持、撤展清场，让客户专心谈客户。</p>
+        <span class="service__link">了解运营服务
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 保障体系 ======================= -->
+<section class="section" id="guarantee">
+  <div class="container">
+    <div class="guarantee">
+      <div class="reveal">
+        <span class="eyebrow">保障体系</span>
+        <h2 style="font-size:clamp(26px,3.4vw,44px);font-weight:700;line-height:1.16;letter-spacing:-.025em;margin-bottom:22px;">
+          把"应该没问题"，<br>变成白纸黑字的承诺。
+        </h2>
+        <p style="color:var(--muted);font-size:15.5px;line-height:1.78;">
+          展会只有一次机会，没有彩排，没有重来。格众用六项硬承诺，把风险留在工厂，把确定带到现场。
+        </p>
+
+        <div class="guarantee__cta">
+          <p>不确定预算够不够？把展位图发给我们，24小时响应初步方案与费用区间。</p>
+          <a href="#contact" class="btn btn--primary">
+            免费获取预算评估
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="guarantee__list reveal" style="transition-delay:.1s">
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h4>透明报价</h4>
+          <p>分项清单报价，合同锁定范围，无隐藏增项一律提前书面签证。</p>
+        </div>
+
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          </div>
+          <h4>工期保障</h4>
+          <p>节点延误按合同承担违约责任，应急班组随时待命。</p>
+        </div>
+
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+          </div>
+          <h4>安全合规</h4>
+          <p>结构计算书、消防材料证明齐全，全程投保展台责任险。</p>
+        </div>
+
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h4>效果还原</h4>
+          <p>出厂前 1:1 预搭，核验无误后再发运搭建，落地与效果图一致。</p>
+        </div>
+
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h4>专属项目经理</h4>
+          <p>一对一对接人负责到底，即时日更进度，随时可问。</p>
+        </div>
+
+        <div class="gitem">
+          <div class="gitem__ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+          </div>
+          <h4>展期应急响应</h4>
+          <p>展期驻场 + 备用物料库，突发问题 30 分钟响应处理。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 客户评价 ======================= -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">客户评价</span>
+      <h2>合作过的客户，是这么说的。</h2>
+    </div>
+
+    <div class="quotes">
+      <article class="quote reveal">
+        <div class="quote__mark">"</div>
+        <p>最让我放心的是工厂预搭那一环。开展前一周我们就看到了实物照片，现场可靠没有意外，这在海外展里太难得了。</p>
+        <div class="quote__by">
+          <div class="quote__av">李</div>
+          <div>
+            <b>李女士</b>
+            <span>某新能源品牌 · 海外市场负责人</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote reveal" style="transition-delay:.06s">
+        <div class="quote__mark">"</div>
+        <p>报价单列得非常细，连运输和撤展清场都写清楚了。最后结算和合同金额一致，没有出现任何临时加价。</p>
+        <div class="quote__by">
+          <div class="quote__av">陈</div>
+          <div>
+            <b>陈先生</b>
+            <span>某工业自动化集团 · 市场部经理</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="quote reveal" style="transition-delay:.12s">
+        <div class="quote__mark">"</div>
+        <p>德国那次报馆资料很复杂，格众的同事全部代办，我们只签了个字。开展前两天搭建完成，还留了一天布展时间。</p>
+        <div class="quote__by">
+          <div class="quote__av">W</div>
+          <div>
+            <b>王女士</b>
+            <span>某汽车配件企业 · 国际业务总监</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 洞察资源 ======================= -->
+<section class="section" id="insights">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">资源洞察</span>
+      <h2>参展这件事，先搞懂再花钱。</h2>
+      <p>我们把十几年踩过的坑，整理成可以直接用的工具和清单，免费提供给参展企业。</p>
+    </div>
+
+    <div class="insights">
+      <article class="insight reveal">
+        <span class="insight__tag">预算指南</span>
+        <h3>展台搭建预算到底怎么算？一份可套用的拆解表</h3>
+        <p>设计费、材料费、人工费、运输费、报馆费、撤展费——六个模块逐项拆解，附主流展馆费用参考区间。</p>
+        <span class="insight__more">下载预算模板
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="insight reveal" style="transition-delay:.06s">
+        <span class="insight__tag">报馆清单</span>
+        <h3>展台报馆审批材料清单（国内 + 海外版）</h3>
+        <p>结构计算书、消防材料证明、电气图纸、施工资质……按展馆分类整理，避免反复退件浪费时间。</p>
+        <span class="insight__more">查看完整清单
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+
+      <article class="insight reveal" style="transition-delay:.12s">
+        <span class="insight__tag">展会日历</span>
+        <h3>2026 全球重点展会日历与参展规划建议</h3>
+        <p>覆盖工业、科技、医疗、新能源四大领域，标注报名截止与搭建进场时间，帮您提前半年做规划。</p>
+        <span class="insight__more">获取展会日历
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================= 联系表单 ======================= -->
+<section class="section contact" id="contact">
+  <div class="container contact__inner">
+    <div class="reveal">
+      <span class="eyebrow">获取报价</span>
+      <h2>告诉我们您的展位，<br>24小时响应给您方案。</h2>
+      <p class="contact__desc">
+        填写下方信息，我们的项目经理会主动联系您，提供初步设计思路、搭建方案与费用区间。
+        不收取任何前期费用，也不做电话骚扰。
+      </p>
+
+      <ul class="contact__points">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          24 小时内响应，含初步方案与预算区间
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          免费提供同行业案例参考与搭建建议
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          支持上门洽谈，现场考察材料工艺
+        </li>
+      </ul>
+
+      <div class="contact__info">
+        <a href="tel:13168781081">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
+          13632770920，13168781081
+        </a>
+        <a href="mailto:59253359@qq.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          gezhong@expo.com
+        </a>
+        <span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.4-7-11a7 7 0 0 1 14 0c0 5.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg>
+  <span class="addr">深圳市 · 龙岗区 · 坂田 · 万科第五园竹清坊B座（ 自有工厂 ）</span>
+</span>
+      </div>
+    </div>
+
+    <div class="form-card reveal" style="transition-delay:.1s">
+            <form id="quoteForm" action="https://formspree.io/f/xvkzzqyd" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="格众展览官网新询盘">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-grid">
+          <div class="field">
+            <label for="company">公司名称 <em>*</em></label>
+            <input type="text" id="company" name="company" placeholder="请输入公司全称" required>
+          </div>
+
+          <div class="field">
+            <label for="name">联系人 <em>*</em></label>
+            <input type="text" id="name" name="name" placeholder="您的称呼" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">手机 / 微信 <em>*</em></label>
+            <input type="tel" id="phone" name="phone" placeholder="方便联系的号码" required>
+          </div>
+
+          <div class="field">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" name="email" placeholder="用于接收方案文件">
+          </div>
+
+          <div class="field">
+            <label for="expo">参展展会名称</label>
+            <input type="text" id="expo" name="expo" placeholder="如：慕尼黑电子展 / 广交会">
+          </div>
+
+          <div class="field">
+            <label for="area">展位面积</label>
+            <select id="area" name="area">
+              <option value="">请选择面积区间</option>
+              <option>18㎡ 以下（标准展位改造）</option>
+              <option>18 - 36㎡</option>
+              <option>36 - 72㎡</option>
+              <option>72 - 150㎡</option>
+              <option>150 - 300㎡</option>
+              <option>300㎡ 以上</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="budget">预算区间</label>
+            <select id="budget" name="budget">
+              <option value="">请选择预算区间</option>
+              <option>3万以内</option>
+              <option>3 -5 万</option>
+              <option>5 - 15 万</option>
+              <option>15 - 30 万</option>
+              <option>30 - 60 万</option>
+              <option>60 万以上</option>
+              <option>暂未确定，需要建议</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="city">展会城市 / 国家</label>
+            <input type="text" id="city" name="city" placeholder="如：上海 / 德国汉诺威">
+          </div>
+
+          <div class="field field--full">
+            <label for="msg">需求描述</label>
+            <textarea id="msg" name="msg" placeholder="简单描述您的参展目标、品牌调性或特殊要求，也可以直接留下展位图下载链接。"></textarea>
+          </div>
+
+          <div class="form-foot">
+            <button type="submit" class="btn btn--primary btn--block">
+              提交需求，24 小时内获取方案
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="form-note">
+  我们承诺严格保护您的信息，仅用于本次方案沟通。<span class="note-break">也可以直接致电 <b>13632770920</b></span>
+</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= 页脚 ======================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="#" class="logo">
+         <svg class="logo__mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="格众展览">
+  <!-- 黄色上弧：收尾线与蓝条等宽（30） -->
+  <path d="M 12,100 A 88,88 0 0 1 188,92 L 158,92 A 58,58 0 0 0 42,100 Z" fill="#F0B400"/>
+  <!-- 蓝色横条 -->
+  <rect x="16" y="100" width="150" height="18" fill="#1565A0"/>
+  <!-- 蓝色下弧 -->
+  <path d="M 12,100 A 88,88 0 0 0 188,100 L 158,100 A 58,58 0 0 1 42,100 Z" fill="#1565A0"/>
+  <!-- 左侧黄色外层三角形 -->
+  <polygon points="12,118 88,118 50,42" fill="#F0B400"/>
+  <!-- 左侧蓝色内层三角形 -->
+  <polygon points="30,118 70,118 50,68" fill="#1565A0"/>
+</svg>
+          <span class="logo__text">
+            <b>深圳市格众展览策划有限公司</b>
+            <span>Shenzhen Gezhong EXPO Co., Ltd.</span><!-- =====SHENZHEN GEZHONG EXHIBITION====== -->
+          </span>
+        </a>
+        <p>专注展台设计、报馆审批、工厂预制与全球搭建，为参展企业提供确定性的展台交付服务。</p>
+        <div class="footer__social">
+          <a href="#" aria-label="微信">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.7 4C4.9 4 2 6.5 2 9.6c0 1.8 1 3.3 2.6 4.4l-.6 2 2.3-1.2c.7.2 1.5.3 2.4.3h.6a5.5 5.5 0 0 1-.2-1.4c0-3 2.8-5.4 6.3-5.4h.6C15.4 5.6 12.4 4 8.7 4Zm-2.3 3a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.6 0a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8Zm4.3 2.3c-3 0-5.5 2.1-5.5 4.7s2.5 4.7 5.5 4.7c.6 0 1.2-.1 1.8-.3l2 1.1-.5-1.7c1.4-.9 2.2-2.2 2.2-3.8 0-2.6-2.5-4.7-5.5-4.7Zm-1.9 2.4a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6Zm3.8 0a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6Z"/></svg>
+          </a>
+          <a href="#" aria-label="QQ">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-3.3 0-5.6 2.5-5.6 5.6 0 .9-.3 1.5-.9 2.3-.7 1-1.5 2-1.5 4 0 1.9.9 3.3 2.5 4.1-.1.6-.1 1.3.1 1.8.2.5.7.7 1.4.7.7 0 1.6-.5 2.2-1.1.6.1 1.2.2 1.8.2s1.2-.1 1.8-.2c.6.6 1.5 1.1 2.2 1.1.7 0 1.2-.2 1.4-.7.2-.5.2-1.2.1-1.8 1.6-.8 2.5-2.2 2.5-4.1 0-2-.8-3-1.5-4-.6-.8-.9-1.4-.9-2.3C17.6 4.5 15.3 2 12 2Zm-2.1 6.5a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Zm4.2 0a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>
+  </a>
+  
+  <a href="#" aria-label="邮件">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm2.5.5L12 12l7.5-5.5h-15ZM20 8.4l-7.4 5.5a1 1 0 0 1-1.2 0L4 8.4V18h16V8.4Z"/></svg>
+  </a>
+<a href="#" aria-label="小红书">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-13Zm4.1 2.2a.9.9 0 0 0-.9.9v6.8a.9.9 0 0 0 1.8 0V8.6a.9.9 0 0 0-.9-.9Zm2.9 1.8a.9.9 0 0 0-.9.9v5a.9.9 0 0 0 1.8 0v-5a.9.9 0 0 0-.9-.9Zm2.9-1.8a.9.9 0 0 0-.9.9v6.8a.9.9 0 0 0 1.8 0V8.6a.9.9 0 0 0-.9-.9Zm2.9 2.6a.9.9 0 0 0-.9.9v4.2a.9.9 0 0 0 1.8 0v-4.2a.9.9 0 0 0-.9-.9Z"/></svg>
+  </a>
+          <a href="#" aria-label="抖音">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v12.4a2.6 2.6 0 1 1-2.1-2.6V8.7a5.8 5.8 0 1 0 5.1 5.7V9.2a6.9 6.9 0 0 0 4 1.3V7.4a3.9 3.9 0 0 1-4-3.9V2Z"/></svg>
+          </a>
+<a href="#" aria-label="领英">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5ZM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21H9Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h5>服务支持</h5>
+        <ul>
+          <li><a href="#services">展台创意设计</a></li>
+          <li><a href="#services">展台搭建施工</a></li>
+          <li><a href="#services">报馆报批代办</a></li>
+          <li><a href="#services">工厂预制预搭</a></li>
+          <li><a href="#services">全球巡展搭建</a></li>
+          <li><a href="#services">展期运营支持</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>案例展示</h5>
+        <ul>
+          <li><a href="#cases">新能源展台</a></li>
+          <li><a href="#cases">电子科技展台</a></li>
+          <li><a href="#cases">医疗医美展台</a></li>
+          <li><a href="#cases">工业制造展台</a></li>
+          <li><a href="#cases">海外展台搭建</a></li>
+          <li><a href="#cases">活动会议美陈</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>资源洞察</h5>
+        <ul>
+          <li><a href="#insights">展台预算计算指南</a></li>
+          <li><a href="#insights">报馆材料清单</a></li> 
+          <li><a href="#guarantee">交付保障体系</a></li>
+<li><a href="#insights">全球展会日历</a></li>
+          <li><a href="#contact">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026 深圳市格众展览策划有限公司 · 保留所有权利</span>
+      <nav>
+        <a href="#">隐私政策</a>
+        <a href="#">服务条款</a>
+        <a href="#">网站地图</a>
+        <a href="#">粤ICP备0000212630号</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ======================= JS ======================= -->
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 顶栏滚动状态 ---------- */
+  var header = document.getElementById('header');
+  var onScroll = function(){
+    if(window.scrollY > 24){ header.classList.add('is-scrolled'); }
+    else{ header.classList.remove('is-scrolled'); }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* ---------- 移动端菜单 ---------- */
+  var burger = document.getElementById('burger');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  burger.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('is-open');
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileMenu.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded','false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ---------- 语言切换（占位交互） ---------- */
+  document.querySelectorAll('.lang button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.lang button').forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+    });
+  });
+
+  /* ---------- 滚动淡入 ---------- */
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+
+    revealEls.forEach(function(el){ revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* ---------- 数字递增 ---------- */
+  var counters = document.querySelectorAll('[data-count]');
+  var animateCount = function(el){
+    var target = parseFloat(el.dataset.count);
+    var duration = 1000;
+    var startTime = null;
+
+    var step = function(now){
+      if(startTime === null){ startTime = now; }
+      var p = Math.min((now - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if(p < 1){ requestAnimationFrame(step); }
+    };
+    requestAnimationFrame(step);
+  };
+
+  if('IntersectionObserver' in window){
+    var countObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          animateCount(entry.target);
+          countObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.6});
+
+    counters.forEach(function(el){ countObserver.observe(el); });
+  } else {
+    counters.forEach(function(el){ el.textContent = el.dataset.count; });
+  }
+
+  /* ---------- 案例筛选 ---------- */
+  var filters = document.querySelectorAll('.filter');
+  var caseItems = document.querySelectorAll('.case');
+
+  filters.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filters.forEach(function(b){ b.classList.remove('is-active'); });
+      btn.classList.add('is-active');
+
+      var key = btn.dataset.filter;
+      caseItems.forEach(function(item){
+        var match = (key === 'all') || (item.dataset.category === key);
+        item.style.display = match ? '' : 'none';
+      });
+    });
+  });
+
+  /* ---------- 表单提交（Formspree） ---------- */
+  var form = document.getElementById('quoteForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    /* 验证必填 */
+    var required = ['company','name','phone'];
+    var valid = true;
+    required.forEach(function(id){
+      var input = document.getElementById(id);
+      if(!input.value.trim()){
+        input.style.borderColor = '#FF4D00';
+        valid = false;
+      } else {
+        input.style.borderColor = '';
+      }
+    });
+    if(!valid){ return; }
+
+    var btn = form.querySelector('button[type="submit"]');
+    var original = btn.innerHTML;
+    btn.disabled = true;
+    btn.style.opacity = '.75';
+    btn.innerHTML = '提交中…';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res){
+      if(res.ok){
+        btn.innerHTML = '✓ 提交成功，我们将在 24 小时内联系您';
+        btn.style.background = '#22C55E';
+        btn.style.boxShadow = '0 8px 28px -10px rgba(34,197,94,.75)';
+        form.reset();
+      } else {
+        btn.innerHTML = '提交失败，请重试或直接致电';
+        btn.style.background = '#EF4444';
+      }
+      setTimeout(function(){
+        btn.disabled = false;
+        btn.style.opacity = '';
+        btn.style.background = '';
+        btn.style.boxShadow = '';
+        btn.innerHTML = original;
+      }, 3800);
+    })
+    .catch(function(){
+      btn.innerHTML = '网络异常，请稍后重试';
+      btn.style.background = '#EF4444';
+      setTimeout(function(){
+        btn.disabled = false;
+        btn.style.opacity = '';
+        btn.style.background = '';
+        btn.style.boxShadow = '';
+        btn.innerHTML = original;
+      }, 3800);
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
