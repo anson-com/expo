@@ -583,6 +583,7 @@ section{position:relative;}
 }
 .case__result svg{width:15px;height:15px;flex-shrink:0;}
 
+
 /* ---------- 单张卡：横版大卡，铺满整行 ---------- */
 .cases.is-single{
   grid-template-columns:1fr;
@@ -982,7 +983,27 @@ section{position:relative;}
 
   .guarantee__list{grid-template-columns:1fr;}
   .form-grid{grid-template-columns:1fr;}
-  .cases{grid-template-columns:1fr;}
+    .cases{grid-template-columns:1fr;}
+  .cases.is-single .case{
+    grid-template-columns:1fr;
+    min-height:auto;
+  }
+  .cases.is-single .case__thumb{
+    aspect-ratio:16/10;
+    height:auto;
+  }
+  .cases.is-single .case__body{
+    padding:22px 20px 24px;
+  }
+  .cases.is-single .case__body h3{
+    font-size:17.5px;
+    line-height:1.35;
+    margin-bottom:9px;
+  }
+  .cases.is-single .case__body p{
+    font-size:13.8px;
+    line-height:1.7;
+  }
 
   .hero__cta .btn{flex:1 1 100%;}
   .hero__points{gap:12px;}
